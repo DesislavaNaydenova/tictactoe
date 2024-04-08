@@ -63,6 +63,10 @@ def checkDiagonal(board):
     elif board[2] == board[4] == board[6] and board[2] != "-":
         winner = board[2]
         return True
+def checkTie(board):
+    if "-" not in board:
+        printGameboard(board)
+        print("It's a TIE")
 #Switch player
 
 
