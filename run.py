@@ -1,3 +1,5 @@
+import random
+
 #Create board
 board = [ "-", "-", "-",
          "-", "-", "-",
@@ -31,29 +33,24 @@ def playerInput(board):
 def checkHorisontal(board):
     global winner
     if board[0] == board[1] == board [3] and board[0] !="-" :
-        print("You won!!!")
+        
         winner = board[0]
         return True
     elif board[3] == board[4] == board[5] and board[3] != "-" :
-        print("you won!!!")
         winner = board[3]
         return True
     elif board[6] == board[7] == board[8] and board[6] != "-" :
-        print("you won!!!")
         winner = board[6]
         return True
 def checkRow(board):
     global winner
-    if board[0] == board[3] == board [6] and board[0] !="-" :
-        print("You won!!!")
+    if board[0] == board[3] == board [6] and board[0] !="-" :        
         winner = board[0]
         return True
-    elif board[1] == board[4] == board[7] and board[1] != "-" :
-        print("you won!!!")
+    elif board[1] == board[4] == board[7] and board[1] != "-" :        
         winner = board[3]
         return True
-    elif board[2] == board[5] == board[8] and board[2] != "-" :
-        print("you won!!!")
+    elif board[2] == board[5] == board[8] and board[2] != "-" :        
         winner = board[2]
         return True
 def checkDiagonal(board):
@@ -65,14 +62,32 @@ def checkDiagonal(board):
         return True
 def checkTie(board):
     if "-" not in board:
+        global gameRunning
         printGameboard(board)
         print("It's a TIE")
+        gameRunning = False
+
+def checkWin():
+    if checkDiagonal(board) or checkHorisontal(board) and checkRow(board) :
+        print(f"The winner is {winner}")
+
 #Switch player
+def switchPlayer():
+    global currentPlayer
+    if currentPlayer=="X":
+        currentPlayer="O"
+    else:
+        currentPlayer = "X"
+
+#computer
 
 
 #Check for Win or Tie again
 while gameRunning:
     printGameboard(board)
     playerInput(board)
+    checkWin()
+    checkTie(board)
+    switchPlayer()
  
     
