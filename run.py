@@ -1,7 +1,7 @@
 #Create board
-board = [ " -", "-", "-",
-         " -", "-", "-",
-         " -", "-", "-"]
+board = [ "-", "-", "-",
+         "-", "-", "-",
+         "-", "-", "-"]
 currentPlayer = "X"
 winner = None
 gameRunning = True
@@ -15,15 +15,16 @@ def printGameboard(board):
     print("-----------")
     print(board[6]+ " | "+ board[7]+ " | "+ board[8])
 
-printGameboard(board)
+
 #Take player input
 
 def playerInput(board):
-    inp = int(input("Enter a nummber form 1 to 9:\n"))
+    inp = int(input("Enter a number from 1 to 9: "))
     if inp >= 1 and inp <= 9 and board[inp -1]== "-":
         board[inp -1] = currentPlayer
-playerInput(board)
-printGameboard(board)
+    else:
+        print("The place is already taken or you did't enter a number from 1 to 9!")
+
 
 
 #Check for Win or Tie
@@ -33,3 +34,7 @@ printGameboard(board)
 
 
 #Check for Win or Tie again
+while gameRunning:
+    printGameboard(board)
+    playerInput(board)
+    
