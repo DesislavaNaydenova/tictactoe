@@ -32,8 +32,7 @@ def playerInput(board):
 #Check for Win or Tie
 def checkHorisontal(board):
     global winner
-    if board[0] == board[1] == board [3] and board[0] !="-" :
-        
+    if board[0] == board[1] == board [2] and board[0] !="-" :        
         winner = board[0]
         return True
     elif board[3] == board[4] == board[5] and board[3] != "-" :
@@ -54,6 +53,7 @@ def checkRow(board):
         winner = board[2]
         return True
 def checkDiagonal(board):
+    global winner
     if board[0] == board[4] == board[8] and board[0] != "-":
         winner= board[0]
         return True
@@ -68,8 +68,7 @@ def checkTie(board):
         gameRunning = False
 
 def checkWin():
-    if checkDiagonal(board) or checkHorisontal(board) and checkRow(board) :
-        print(f"The winner is {winner}")
+    return checkDiagonal(board) or checkHorisontal(board) or checkRow(board)
 
 #Switch player
 def switchPlayer():
@@ -80,14 +79,29 @@ def switchPlayer():
         currentPlayer = "X"
 
 #computer
-
+def computer(board):
+    while currentPlayer== "O":
+        position = random.randint(0, 8)
+        if board[position] == "-":
+            board[position] = "O"
+            switchPlayer()
+            break
 
 #Check for Win or Tie again
 while gameRunning:
     printGameboard(board)
     playerInput(board)
-    checkWin()
+    if checkWin():
+        printGameboard(board)
+        print(f"The winner is {winner}!")
+        break
     checkTie(board)
     switchPlayer()
+    computer(board)
+    if checkWin():
+        printGameboard(board)
+        print(f"The winner is {winner}!")
+        break
+    checkTie(board)
  
     
