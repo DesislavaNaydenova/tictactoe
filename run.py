@@ -18,14 +18,14 @@ def printGameboard(board):
     print(board[6]+ " | "+ board[7]+ " | "+ board[8])
 
 
-#Take player input
 
+#Take player input
 def playerInput(board):
     inp = int(input("Enter a number from 1 to 9: "))
     if inp >= 1 and inp <= 9 and board[inp -1]== "-":
         board[inp -1] = currentPlayer
     else:
-        print("The place is already taken or you did't enter a number from 1 to 9!")
+        print("The place is already taken!")
 
 
 
@@ -41,6 +41,8 @@ def checkHorisontal(board):
     elif board[6] == board[7] == board[8] and board[6] != "-" :
         winner = board[6]
         return True
+
+
 def checkRow(board):
     global winner
     if board[0] == board[3] == board [6] and board[0] !="-" :        
@@ -52,6 +54,8 @@ def checkRow(board):
     elif board[2] == board[5] == board[8] and board[2] != "-" :        
         winner = board[2]
         return True
+
+
 def checkDiagonal(board):
     global winner
     if board[0] == board[4] == board[8] and board[0] != "-":
@@ -60,6 +64,8 @@ def checkDiagonal(board):
     elif board[2] == board[4] == board[6] and board[2] != "-":
         winner = board[2]
         return True
+
+
 def checkTie(board):
     if "-" not in board:
         global gameRunning
@@ -67,8 +73,10 @@ def checkTie(board):
         print("It's a TIE")
         gameRunning = False
 
+
 def checkWin():
     return checkDiagonal(board) or checkHorisontal(board) or checkRow(board)
+
 
 #Switch player
 def switchPlayer():
@@ -78,6 +86,7 @@ def switchPlayer():
     else:
         currentPlayer = "X"
 
+
 #computer
 def computer(board):
     while currentPlayer== "O":
@@ -86,6 +95,7 @@ def computer(board):
             board[position] = "O"
             switchPlayer()
             break
+        
 
 #Check for Win or Tie again
 while gameRunning:
